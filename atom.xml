@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>迅捷工作室</title>
   
-  
+  <subtitle>缤纷独角兽</subtitle>
   <link href="http://yimobinen.github.io/atom.xml" rel="self"/>
   
   <link href="http://yimobinen.github.io/"/>
-  <updated>2020-08-14T12:50:56.429Z</updated>
+  <updated>2020-08-15T10:09:59.456Z</updated>
   <id>http://yimobinen.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>基础都掌握了却还是敲不出代码？编程新手如何快速提升coding能力？</title>
+    <title>如何快速提升coding能力</title>
     <link href="http://yimobinen.github.io/2020/08/14/wo-de-di-yi-pian-wen-zhang/"/>
     <id>http://yimobinen.github.io/2020/08/14/wo-de-di-yi-pian-wen-zhang/</id>
     <published>2020-08-14T11:36:51.000Z</published>
-    <updated>2020-08-14T12:50:56.429Z</updated>
+    <updated>2020-08-15T10:09:59.456Z</updated>
     
     
       
@@ -32,27 +32,6 @@
 &lt;p&gt;相信很多初学编程的朋友都有这样的苦恼：为什么我感觉自己基础都掌握了，但是学校的课程结束后再进行编程时还是什么都不会呢？&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h6 id=&quot;通常新手程序员会以不同的方式来表达这个疑问&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://yimobinen.github.io/2020/08/12/hello-world/"/>
-    <id>http://yimobinen.github.io/2020/08/12/hello-world/</id>
-    <published>2020-08-11T20:15:25.305Z</published>
-    <updated>2020-08-11T20:15:25.305Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;</summary>
         
       
     
