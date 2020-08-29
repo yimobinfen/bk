@@ -3,11 +3,11 @@
   <title>迅捷工作室</title>
   
   <subtitle>缤纷的小屋</subtitle>
-  <link href="http://yimobinen.github.io/atom.xml" rel="self"/>
+  <link href="http://www.xy-gzs.top/atom.xml" rel="self"/>
   
-  <link href="http://yimobinen.github.io/"/>
-  <updated>2020-08-15T10:09:59.456Z</updated>
-  <id>http://yimobinen.github.io/</id>
+  <link href="http://www.xy-gzs.top/"/>
+  <updated>2020-08-29T04:09:08.370Z</updated>
+  <id>http://www.xy-gzs.top/</id>
   
   <author>
     <name>Huang ning</name>
@@ -17,9 +17,30 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>闭包谈之-函数，函数基本该鸟</title>
+    <link href="http://www.xy-gzs.top/2020/08/29/bi-bao-tan-zhi-han-shu-han-shu-ji-ben-gai-nian/"/>
+    <id>http://www.xy-gzs.top/2020/08/29/bi-bao-tan-zhi-han-shu-han-shu-ji-ben-gai-nian/</id>
+    <published>2020-08-29T03:55:56.000Z</published>
+    <updated>2020-08-29T04:09:08.370Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;闭包谈之-函数，函数基本概念&quot;&gt;&lt;a href=&quot;#闭包谈之-函数，函数基本概念&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>如何快速提升coding能力</title>
-    <link href="http://yimobinen.github.io/2020/08/14/wo-de-di-yi-pian-wen-zhang/"/>
-    <id>http://yimobinen.github.io/2020/08/14/wo-de-di-yi-pian-wen-zhang/</id>
+    <link href="http://www.xy-gzs.top/2020/08/14/wo-de-di-yi-pian-wen-zhang/"/>
+    <id>http://www.xy-gzs.top/2020/08/14/wo-de-di-yi-pian-wen-zhang/</id>
     <published>2020-08-14T11:36:51.000Z</published>
     <updated>2020-08-15T10:09:59.456Z</updated>
     
