@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="闭包谈之-函数，函数基本概念, 前端 js html5 框架 博客 VUE 学习 资源 心得 体会">
+    <meta name="keywords" content="hexo常用命令笔记, 前端 js html5 框架 博客 VUE 学习 资源 心得 体会">
     <meta name="description" content="坚持不懈，勇往直前">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>闭包谈之-函数，函数基本概念 | 迅捷工作室</title>
+    <title>hexo常用命令笔记 | 迅捷工作室</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,7 +310,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">闭包谈之-函数，函数基本概念</h1>
+                    <h1 class="description center-align post-title">hexo常用命令笔记</h1>
                 </div>
             </div>
         </div>
@@ -439,7 +439,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-08-29
+                    2020-08-30
                 </div>
                 
 
@@ -455,96 +455,122 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<p>本文总结JavaScript中常用知识点，包含 1基础概念，2闭包，3this执行问题， 4高阶函数，5柯里化等，手写代码满满的干货，值得一看  </p>
+                <h2 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h2><pre><code>npm install hexo -g #安装  
+npm update hexo -g #升级  
+hexo init #初始化  </code></pre>
+<h2 id="简写"><a href="#简写" class="headerlink" title="简写"></a>简写</h2><pre><code>hexo n "我的博客" == hexo new "我的博客" #新建文章
+hexo p == hexo publish
+hexo g == hexo generate#生成
+hexo s == hexo server #启动服务预览
+hexo d == hexo deploy#部署  </code></pre>
+<h2 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h2><pre><code>hexo server #Hexo 会监视文件变动并自动更新，您无须重启服务器。
+hexo server -s #静态模式
+hexo server -p 5000 #更改端口
+hexo server -i 192.168.1.1 #自定义 IP
+
+hexo clean #清除缓存 网页正常情况下可以忽略此条命令
+hexo g #生成静态网页
+hexo d #开始部署</code></pre>
+<h2 id="监视文件变动"><a href="#监视文件变动" class="headerlink" title="监视文件变动"></a>监视文件变动</h2><pre><code>hexo generate #使用 Hexo 生成静态文件快速而且简单
+hexo generate --watch #监视文件变动</code></pre>
+<h2 id="完成后部署"><a href="#完成后部署" class="headerlink" title="完成后部署"></a>完成后部署</h2><blockquote>
+<p>两个命令的作用是相同的<br>hexo generate –deploy<br>hexo deploy –generate</p>
 </blockquote>
-<p>引入一张图片：</p>
-<p><img src="http://bk.xy-gzs.top/images/bibao/%E5%87%BD%E6%95%B0.png" alt="函数" title="函数"></p>
-<h2 id="什么是函数"><a href="#什么是函数" class="headerlink" title="什么是函数"></a>什么是函数</h2><blockquote>
-<p>一个函数可以通过外部代码调用的一个“子程序”。</p>
-</blockquote>
-<p>函数首先是一个对象，并且在js中，函数是一等对象[first-class object].</p>
-<p>函数可以被执行（callback，用于内部属性|call）,这是函数的本质特性。</p>
-<p>除此之外，函数可以赋值个变量，也可以作为函数参数，也可以作为另一个函数的返回值。</p>
-<h2 id="函数的基本概念"><a href="#函数的基本概念" class="headerlink" title="函数的基本概念"></a>函数的基本概念</h2><h3 id="函数名"><a href="#函数名" class="headerlink" title="函数名"></a>函数名</h3><p>函数名是函数的标识，如果一个函数不是匿名函数，它应该被赋予函数名。</p>
-<ul>
-<li>函数命名需要符合javascript标识符规则，必须以字母、下划线_或美元符$开始，后面可以跟数字，字母，下划线，美元符。</li>
-<li>函数命名不能使用javascript保留字，保留字是javascript中具有特殊含义的标识符。</li>
-<li>函数命名应该语义化，尽量采用动宾结构，小驼峰写法，比如getUserName()，validateForm(), isValidMobilePhone()。</li>
-<li>对于构造函数，我们通常写成大驼峰格式（因为构造函数与类的概念强关联）。</li>
-</ul>
-<p>下面是一些不成文的约定，不成文代表它不必遵守，但是我们按照这样的约定来执行，会让开发变得更有效率。</p>
-<p>__xxx__代表非标准的方法。<br>_xxx代表私有方法。</p>
-<h3 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h3><h4 id="形参"><a href="#形参" class="headerlink" title="形参"></a>形参</h4><blockquote>
-<p>形参是函数定义时约定的参数列表，由一对圆括号()包裹。  </p>
-</blockquote>
-<p>  在MDN上有看到，一个函数最多有255个参数。<br>  然而形参太多时，使用者总是容易在引用时出错。<br>  所有对于数量较多的形参，一般推荐把所有的参数作为属性或方法整合到一个对象中去，各个参数作为这个对象的属性和方法来使用。<br>  <code>  wx.redirectTo(object object)</code><br>  调用示例如下<br>  <code>    wx.redirectTo({       url : '',       success: funxtion(){},       fail : function(){}  </code><br>  形参的参数数量可以由函数的 length 属性获得，<br>  <code> function test(a ,b ,c){} test.length</code>  </p>
-<h4 id="实参"><a href="#实参" class="headerlink" title="实参"></a>实参</h4><blockquote>
-<p>实参是调用函数时传入的，实参的值在函数执行前被确定。  </p>
-</blockquote>
-<p>  javascript在 <strong>函数定义时并不会确定参数的数据类型</strong>。<br>  如果你期望函数调用时传入正确的数据类型,必须在函数体内进行入参数据类型判断。<br>  <code>    function add(a, b){       if (typeof a !== 'number' || typeof b != 'number') {         throw new Error('参数必须是数字类型');       }     }  </code><br>  好在<strong>Typescrit</strong>提供了数据类型检查的能力，这一定程度上防止了意外情况的发生.<br>  实参的数量可以通过函数中<strong>arguments</strong>对象中的 length 属性获得，如下所示。<br>  实参数量不一定与形参数量一致。<br>  <code>function test(a, b, c) {     var argLength = arguments.length;     return argLength;   }   test(1, 2);   </code>  </p>
-<h4 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h4><blockquote>
-<p>函数参数的默认值是undefined，如果你不传入实参，那么实际上在函数执行过程中，相应参数的值是undefined。  </p>
-</blockquote>
-<p>  EC6也支持在函数声明是设置参数的默认值。<br>  <code>  function add(a, b = 2){     return a + b;   }   add(1); //3  </code><br>  在上面的add函数中，参数b被执行了默认值2.所以，即使你不传入参数b的值，也能得到预期的结果。<br>  假设 一个函数有多个参数，我们希望不给中间的某个参数传值，那么这个参数值必须显示的指定为undefined,否则我们期望传给后面的参数的值会被传到中间这个参数。<br>  <code>  function printUserInfo(name, age = 10, gender){     console.log('姓名：$(name)，年龄：$(age)，性别：$(gender)');   }   //正确使用方法   printUserInfo('Bob', undefined, 'male');   //错误的用法   printUserInfo('Bob', 'male');  </code><br>  注意，如果你希望使用参数的默认值，请一定传undefined,而不是null.<br>  当然，我们也可以在函数体中判断参数的数据类型，防止参数被误用.<br>  <code>  function printUserInfo(name, age = 10, gender){     if (typeof arguments[1] ==== 'string') {       age = 10;       gender = arguments[i];     }     console.log(('姓名：$(name)，年龄：$(age)，性别：$(gender)');   }   printUserInfo('Bob', 'male');  </code><br>  这样一来，函数不会乱了。  </p>
-<h4 id="剩余参数"><a href="#剩余参数" class="headerlink" title="剩余参数"></a>剩余参数</h4><blockquote>
-<p>剩余参数语法允许我们将一个不定数量的参数表示为一个数组。  </p>
-</blockquote>
-<p>  剩余参数通过剩余语法 … 将多个参数聚合成一个数组。<br>  <code>  function add(a, ...args){     return args.reduce((prev, curr) =&gt; {       return prev + curr     }, a)   }  </code><br>  剩余参数和arguments对象之间的区别主要有三个：  </p>
-<ul>
-<li><p>剩余参数只包含那些没有对应形参的实参，而arguments对象包含了传给函数的所有实参  </p>
+<pre><code>hexo deploy -g
+hexo server -g</code></pre>
+<h2 id="草稿"><a href="#草稿" class="headerlink" title="草稿"></a>草稿</h2><pre><code>hexo publish [layout] &lt;title&gt;</code></pre>
+<h2 id="模版"><a href="#模版" class="headerlink" title="模版"></a>模版</h2><pre><code>hexo new "postName" #新建文章
+hexo new page "pageName" #新建页面
+hexo generate #生成静态页面至public目录
+hexo server #开启预览访问端口（默认端口4000，'ctrl + c'关闭server）
+hexo deploy #将.deploy目录部署到GitHub
+
+hexo new [layout] &lt;title&gt;
+hexo new photo "My Gallery"
+hexo new "Hello World" --lang tw  </code></pre>
+<p>|变量|    描述|<br>|layout|    布局|<br>|title|    标题|<br>|date|    文件建立日期|  </p>
+<pre><code>title: 使用Hexo搭建个人博客
+layout: post
+date: 2014-03-03 19:07:43
+comments: true
+categories: Blog
+tags: [Hexo]
+keywords: Hexo, Blog
+description: 生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞。</code></pre>
+<h2 id="模版（Scaffold）"><a href="#模版（Scaffold）" class="headerlink" title="模版（Scaffold）"></a>模版（Scaffold）</h2><pre><code>hexo new photo "My Gallery"  </code></pre>
+<p>|变量|    描述|<br>|layout    |布局|<br>|title|    标题|<br>date    |文件建立日期|</p>
+<h2 id="设置文章摘要"><a href="#设置文章摘要" class="headerlink" title="设置文章摘要"></a>设置文章摘要</h2><pre><code>以上是文章摘要 &lt;!--more--&gt; 以下是余下全文   </code></pre>
+<h2 id="写作"><a href="#写作" class="headerlink" title="写作"></a>写作</h2><pre><code>hexo new page &lt;title&gt;
+hexo new post &lt;title&gt;</code></pre>
+<p>|变量    |描述|<br>:title    标题|<br>|:year|    建立的年份（4 位数）|<br>|:month|    建立的月份（2 位数）|<br>|:i_month|    建立的月份（去掉开头的零）|<br>|:day|    建立的日期（2 位数）|<br>|:i_day|    建立的日期（去掉开头的零）|</p>
+<h2 id="推送到服务器上"><a href="#推送到服务器上" class="headerlink" title="推送到服务器上"></a>推送到服务器上</h2><pre><code>hexo n #写文章
+hexo g #生成
+hexo d #部署 #可与hexo g合并为 hexo d -g</code></pre>
+<h1 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h1><ol>
+<li><p>找不到git部署  </p>
+<pre><code> ERROR Deployer not found: git</code></pre>
+<p>   解决方法  </p>
+<pre><code> npm install hexo-deployer-git --save</code></pre>
 </li>
-<li><p>剩余参数是真正的Array实例，可以使用所有数组方法，如sort，map，forEach或pop<br>arguments对象不是一个真实的数组，不能使用上面数组方法，必须借助call来实现，如 [].slice.call(arguments).<br>arguments对象还有一些附加的属性:callee属性。  </p>
-<p>剩余语法和展开运算符看起来很相似，然而从功能上来说，是完全相反的。</p>
+<li><p>部署类型设置git</p>
 <blockquote>
-<p>剩余语法(Rest syntax) 看起来和展开语法完全相同，不同点在于, 剩余参数用于解构数组和对象。从某种意义上说，剩余语法与展开语法是相反的：展开语法将数组展开为其中的各个元素，而剩余语法则是将多个元素收集起来并“凝聚”为单个元素。  </p>
+<p>hexo 3.0 部署类型不再是github，_config.yml 中修改</p>
 </blockquote>
-<h4 id="arguments"><a href="#arguments" class="headerlink" title="arguments"></a>arguments</h4><blockquote>
-<p>函数的的实例参数会被保存在一个类数组对象arguments中。  </p>
-</blockquote>
-<p>(arrayLike)类数组对象具备一个非负length属性，并且可以通过从0开始的索引去访问元素，让人看起来觉得像数组，比如 NodeList，但是类数组默认没有数组的那些内置方法，如push， pop, forEach， map。<br>我们可以试试，随便找一个网站，在控制台输入：<br><code>var linkList = document.querySelectorAll('a');</code><br>就得到一个NodeList，我们也可以通过数字下标去访问其中的元素，比如linkList[0]。<br>但是NodeList不是数组，它是类数组。<br><code>Array.isArray(linkLisk); //false</code><br>回到主题，arguments也是类数组，arguments的length由实参的数量决定，而不是形参的数量决定。<br><code>function add(a, b){ console.log(arguments.length); return a + b; } add(1, 2, 3, 4);//这里打印的是4，而不是2</code><br>arguments也是一个和严格模式有关联的对象</p>
+<pre><code> \# Deployment
+ \#\# Docs: http://hexo.io/docs/deployment.html
+ deploy:
+   type: git
+   repository: git@***.github.com:***/***.github.io.git
+   branch: master</code></pre>
 </li>
-</ul>
-<ul>
-<li><p>在非严格模式下，arguments里的元素和函数参数都是指向同一个值得引用，对arguments的修改，会直接影响函数参数。  </p>
-<p><code>function test(obj){ arguments[0] = '传入的实参是一个对象，但是被我变成字符串了'; console.log(obj) } test({name: 'jack'});</code>  </p>
-</li>
-<li><p>在严格模式下，arguments是函数参数的副本，对arguments的修改不会影响函数参数。但是arguments不能重新被赋值，关于这一点，参考另外一边文章“解读闭包，从ECMAScript词法环境，执行上下文说起”，文章解读不可变绑定是提到。在严格模式下，也不能使用arguments.caller和arguments.callee,限制了对调用栈的检测能力。  </p>
-<h3 id="函数体"><a href="#函数体" class="headerlink" title="函数体"></a>函数体</h3><blockquote>
-<p>函数体是函数的主体，其中的函数代码（function code）由一堆花括号{}包裹。函数体可以为空，也可以由任意条JavaScript语句组成。  </p>
+<li><p>xcodebuild  </p>
+<blockquote>
+<p>xcode-select: error: tool ‘xcodebuild’ requires Xcode, but active developer directory ‘/Library/Developer/CommandLineTools’ is a command line tools instance</p>
 </blockquote>
-<h3 id="函数的调用形式"><a href="#函数的调用形式" class="headerlink" title="函数的调用形式"></a>函数的调用形式</h3><p>大体分为四种，作为普通函数，作为对象的方法，作为构造函数，通过call，apply调用  </p>
-<h4 id="作为普通函数"><a href="#作为普通函数" class="headerlink" title="作为普通函数"></a>作为普通函数</h4><blockquote>
-<p>函数作为普通函数被调用，这是函数调用的常用形式。  </p>
-</blockquote>
-<p><code>function add(a, b){ return a + b; } add();</code>  </p>
-<p>作为普通函数调用时，如果在严格模式下，函数执行时，this指向全局对象，那么对于浏览器而言，则是window对象；如果在非严格模式下，this则指向undefined。  </p>
-<h4 id="作为对象的方法"><a href="#作为对象的方法" class="headerlink" title="作为对象的方法"></a>作为对象的方法</h4><blockquote>
-<p>函数也可以作为对象的成员，这种情况下，该函数通常被称为对象方法。当函数作为对象的方法被调用时，this指向该对象，此时便可以通过this访问对象的其他成员变量或方法。  </p>
-</blockquote>
-<p><code>var counter = { num : 0, increase : function() {   this.num++; } } counter.increase();</code>  </p>
-<h4 id="作为构造函数"><a href="#作为构造函数" class="headerlink" title="作为构造函数"></a>作为构造函数</h4><blockquote>
-<p>函数配合new关键字使用时就成了构造函数。  </p>
-</blockquote>
-<p>构造函数用于实例化对象，构造函数执行过程大致如下：</p>
+<pre><code> npm install bcrypt</code></pre>
 </li>
-</ul>
-<ol>
-<li><p>首先创建一个新对象，这个新对象的_proto_属性指向构造函数的prototype属性。</p>
-</li>
-<li><p>此时构造函数的this指向这个新对象。</p>
-</li>
-<li><p>执行构造函数中的代码，一般是通过this给新对象添加新的成员属性或方法。</p>
-</li>
-<li><p>最后返回这个新对象。<br>实例化对象也可以通过一些技巧来简化，比如在构造函数中显示的return另一个对象，jQuery很巧妙地利用了这一点。具体分析详见另外篇文章“new的实现以及无new实例化”  </p>
-<h4 id="通过call，apply调用"><a href="#通过call，apply调用" class="headerlink" title="通过call，apply调用"></a>通过call，apply调用</h4><blockquote>
-<p>apply和call是函数对象的原型方法，挂载于Function.prototype。利用这俩方法，我们可以显示地绑定一个this作为调用上下文，同时也可以设置函数调用时的参数。  </p>
+<li><p>RSS不显示  </p>
+<blockquote>
+<p>安装RSS插件  </p>
 </blockquote>
+<pre><code> npm install hexo-generator-feed --save</code></pre>
 </li>
 </ol>
-<p>  apply和call的区别在于：提供参数的形式不同，apply方法接受的是一个参数数组，call方法接受的是参数列表。  </p>
-<p>  <code>  someFunc.apply(obj, 1, 2, 3);   someFunc.call(obj, [1, 2, 3]);  </code>  </p>
-<p>  <em>注意，在非严格模式下使用call或apply时，如果第一个参数被指定为null或undefined，那么函数执行时的this指向全局对象（浏览器环境中是window）；<br>  如果第一个参数被指定为原始值，该原始值会被包裹。这部分内容在下文中的手写代码中会再次提到。</em><br>  call是用来实现继承的重要方法。在子类构造函数中，通过call来调用父类构造函数，以使对象实例获得来自父类构造函数的属性或方法。<br>  <code>    function Father(){       this.nationality = 'Han';     };     Father.prototype.propA = '我是父类原型上的属性';     function Child(){       Father.call(this);     };     Child.prototype.propB = '我是子类原型上的属性';     var child = new Child();     child.nationality; //Han  </code></p>
+<h1 id="开启RSS功能"><a href="#开启RSS功能" class="headerlink" title="开启RSS功能"></a>开启RSS功能</h1><p>  编辑hexo/_config.yml，添加如下代码：</p>
+<pre><code>rss: /atom.xml #rss地址  默认即可</code></pre>
+<h2 id="开启评论"><a href="#开启评论" class="headerlink" title="开启评论"></a>开启评论</h2><p>1.我使用多说代替自带的评论，在多说 网站注册 &gt; 后台管理 &gt; 添加新站点 &gt; 工具 === 复制通用代码 里面有 short_name</p>
+<pre><code>  在根目录 _config.yml 添加一行 disqus_shortname: jslite 是在多说注册时产生的
+
+  复制到 themes\landscape\layout\_partial\article.ejs
+  把
+    &lt;% if (!index &amp;&amp; post.comments &amp;&amp; config.disqus_shortname){ %&gt;
+    &lt;section id="comments"&gt;
+    &lt;div id="disqus_thread"&gt;
+      &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="//disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
+    &lt;/div&gt;
+    &lt;/section&gt;
+    &lt;% } %&gt;
+  改为
+    &lt;% if (!index &amp;&amp; post.comments &amp;&amp; config.disqus_shortname){ %&gt;
+      &lt;section id="comments"&gt;
+        &lt;!-- 多说评论框 start --&gt;
+        &lt;div class="ds-thread" data-thread-key="&lt;%= post.layout %&gt;-&lt;%= post.slug %&gt;" data-title="&lt;%= post.title %&gt;" data-url="&lt;%= page.permalink %&gt;"&gt;&lt;/div&gt;
+        &lt;!-- 多说评论框 end --&gt;
+        &lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;
+        &lt;script type="text/javascript"&gt;
+        var duoshuoQuery = {short_name:'&lt;%= config.disqus_shortname %&gt;'};
+          (function() {
+            var ds = document.createElement('script');
+            ds.type = 'text/javascript';ds.async = true;
+            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+            ds.charset = 'UTF-8';
+            (document.getElementsByTagName('head')[0] 
+            || document.getElementsByTagName('body')[0]).appendChild(ds);
+          })();
+          &lt;/script&gt;
+        &lt;!-- 多说公共JS代码 end --&gt;
+      &lt;/section&gt;
+    &lt;% } %&gt;</code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -588,7 +614,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.xy-gzs.top/2020/08/29/2/">http://www.xy-gzs.top/2020/08/29/2/</a>
+                    <a href="http://www.xy-gzs.top/2020/08/30/hexo-chang-yong-ming-ling-bi-ji/">http://www.xy-gzs.top/2020/08/30/hexo-chang-yong-ming-ling-bi-ji/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -791,9 +817,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/08/30/hexo-chang-yong-ming-ling-bi-ji/">
                     <div class="card-image">
@@ -815,9 +842,9 @@ hexo p
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-08-30
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-30
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -826,6 +853,7 @@ hexo p
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -836,29 +864,32 @@ hexo p
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/08/14/1/">
+                <a href="/2020/08/29/2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="如何快速提升coding能力">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="闭包谈之-函数，函数基本概念">
                         
-                        <span class="card-title">如何快速提升coding能力</span>
+                        <span class="card-title">闭包谈之-函数，函数基本概念</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
                             
-相信很多初学编程的朋友都有这样的苦恼：为什么我感觉自己基础都掌握了，但是学校的课程结束后再进行编程时还是什么都不会呢？
+本文总结JavaScript中常用知识点，包含 1基础概念，2闭包，3this执行问题， 4高阶函数，5柯里化等，手写代码满满的干货，值得一看  
 
-通常新手程序员会以不同的方式来表达这个疑问比如：
+引入一张图片：
 
-“我通过在线课程学习了Python，但是我还是不知道怎么用它来编
+什么是函数
+一个函数可以通过外部代码调用的一个“子程序”。
+
+函数首先
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-14
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-29
                             </span>
                         <span class="publish-author">
                             
