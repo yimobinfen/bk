@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="如何快速提升coding能力, 前端 js html5 框架 博客 VUE 学习 资源 心得 体会">
+    <meta name="keywords" content="闭包谈之-函数，函数基本概念, 前端 js html5 框架 博客 VUE 学习 资源 心得 体会">
     <meta name="description" content="坚持不懈，勇往直前">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>如何快速提升coding能力 | 迅捷工作室</title>
+    <title>闭包谈之-函数，函数基本概念 | 迅捷工作室</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -305,12 +305,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">如何快速提升coding能力</h1>
+                    <h1 class="description center-align post-title">闭包谈之-函数，函数基本概念</h1>
                 </div>
             </div>
         </div>
@@ -439,7 +439,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-08-14
+                    2020-08-29
                 </div>
                 
 
@@ -456,18 +456,95 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <blockquote>
-<p>相信很多初学编程的朋友都有这样的苦恼：为什么我感觉自己基础都掌握了，但是学校的课程结束后再进行编程时还是什么都不会呢？</p>
+<p>本文总结JavaScript中常用知识点，包含 1基础概念，2闭包，3this执行问题， 4高阶函数，5柯里化等，手写代码满满的干货，值得一看  </p>
 </blockquote>
-<h6 id="通常新手程序员会以不同的方式来表达这个疑问"><a href="#通常新手程序员会以不同的方式来表达这个疑问" class="headerlink" title="通常新手程序员会以不同的方式来表达这个疑问"></a>通常新手程序员会以不同的方式来表达这个疑问</h6><p>比如：</p>
+<p>引入一张图片：</p>
+<p><img src="http://bk.xy-gzs.top/images/bibao/%E5%87%BD%E6%95%B0.png" alt="函数" title="函数"></p>
+<h2 id="什么是函数"><a href="#什么是函数" class="headerlink" title="什么是函数"></a>什么是函数</h2><blockquote>
+<p>一个函数可以通过外部代码调用的一个“子程序”。</p>
+</blockquote>
+<p>函数首先是一个对象，并且在js中，函数是一等对象[first-class object].</p>
+<p>函数可以被执行（callback，用于内部属性|call）,这是函数的本质特性。</p>
+<p>除此之外，函数可以赋值个变量，也可以作为函数参数，也可以作为另一个函数的返回值。</p>
+<h2 id="函数的基本概念"><a href="#函数的基本概念" class="headerlink" title="函数的基本概念"></a>函数的基本概念</h2><h3 id="函数名"><a href="#函数名" class="headerlink" title="函数名"></a>函数名</h3><p>函数名是函数的标识，如果一个函数不是匿名函数，它应该被赋予函数名。</p>
+<ul>
+<li>函数命名需要符合javascript标识符规则，必须以字母、下划线_或美元符$开始，后面可以跟数字，字母，下划线，美元符。</li>
+<li>函数命名不能使用javascript保留字，保留字是javascript中具有特殊含义的标识符。</li>
+<li>函数命名应该语义化，尽量采用动宾结构，小驼峰写法，比如getUserName()，validateForm(), isValidMobilePhone()。</li>
+<li>对于构造函数，我们通常写成大驼峰格式（因为构造函数与类的概念强关联）。</li>
+</ul>
+<p>下面是一些不成文的约定，不成文代表它不必遵守，但是我们按照这样的约定来执行，会让开发变得更有效率。</p>
+<p>__xxx__代表非标准的方法。<br>_xxx代表私有方法。</p>
+<h3 id="函数参数"><a href="#函数参数" class="headerlink" title="函数参数"></a>函数参数</h3><h4 id="形参"><a href="#形参" class="headerlink" title="形参"></a>形参</h4><blockquote>
+<p>形参是函数定义时约定的参数列表，由一对圆括号()包裹。  </p>
+</blockquote>
+<p>  在MDN上有看到，一个函数最多有255个参数。<br>  然而形参太多时，使用者总是容易在引用时出错。<br>  所有对于数量较多的形参，一般推荐把所有的参数作为属性或方法整合到一个对象中去，各个参数作为这个对象的属性和方法来使用。<br>  <code>  wx.redirectTo(object object)</code><br>  调用示例如下<br>  <code>    wx.redirectTo({       url : '',       success: funxtion(){},       fail : function(){}  </code><br>  形参的参数数量可以由函数的 length 属性获得，<br>  <code> function test(a ,b ,c){} test.length</code>  </p>
+<h4 id="实参"><a href="#实参" class="headerlink" title="实参"></a>实参</h4><blockquote>
+<p>实参是调用函数时传入的，实参的值在函数执行前被确定。  </p>
+</blockquote>
+<p>  javascript在 <strong>函数定义时并不会确定参数的数据类型</strong>。<br>  如果你期望函数调用时传入正确的数据类型,必须在函数体内进行入参数据类型判断。<br>  <code>    function add(a, b){       if (typeof a !== 'number' || typeof b != 'number') {         throw new Error('参数必须是数字类型');       }     }  </code><br>  好在<strong>Typescrit</strong>提供了数据类型检查的能力，这一定程度上防止了意外情况的发生.<br>  实参的数量可以通过函数中<strong>arguments</strong>对象中的 length 属性获得，如下所示。<br>  实参数量不一定与形参数量一致。<br>  <code>function test(a, b, c) {     var argLength = arguments.length;     return argLength;   }   test(1, 2);   </code>  </p>
+<h4 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h4><blockquote>
+<p>函数参数的默认值是undefined，如果你不传入实参，那么实际上在函数执行过程中，相应参数的值是undefined。  </p>
+</blockquote>
+<p>  EC6也支持在函数声明是设置参数的默认值。<br>  <code>  function add(a, b = 2){     return a + b;   }   add(1); //3  </code><br>  在上面的add函数中，参数b被执行了默认值2.所以，即使你不传入参数b的值，也能得到预期的结果。<br>  假设 一个函数有多个参数，我们希望不给中间的某个参数传值，那么这个参数值必须显示的指定为undefined,否则我们期望传给后面的参数的值会被传到中间这个参数。<br>  <code>  function printUserInfo(name, age = 10, gender){     console.log('姓名：$(name)，年龄：$(age)，性别：$(gender)');   }   //正确使用方法   printUserInfo('Bob', undefined, 'male');   //错误的用法   printUserInfo('Bob', 'male');  </code><br>  注意，如果你希望使用参数的默认值，请一定传undefined,而不是null.<br>  当然，我们也可以在函数体中判断参数的数据类型，防止参数被误用.<br>  <code>  function printUserInfo(name, age = 10, gender){     if (typeof arguments[1] ==== 'string') {       age = 10;       gender = arguments[i];     }     console.log(('姓名：$(name)，年龄：$(age)，性别：$(gender)');   }   printUserInfo('Bob', 'male');  </code><br>  这样一来，函数不会乱了。  </p>
+<h4 id="剩余参数"><a href="#剩余参数" class="headerlink" title="剩余参数"></a>剩余参数</h4><blockquote>
+<p>剩余参数语法允许我们将一个不定数量的参数表示为一个数组。  </p>
+</blockquote>
+<p>  剩余参数通过剩余语法 … 将多个参数聚合成一个数组。<br>  <code>  function add(a, ...args){     return args.reduce((prev, curr) =&gt; {       return prev + curr     }, a)   }  </code><br>  剩余参数和arguments对象之间的区别主要有三个：  </p>
+<ul>
+<li><p>剩余参数只包含那些没有对应形参的实参，而arguments对象包含了传给函数的所有实参  </p>
+</li>
+<li><p>剩余参数是真正的Array实例，可以使用所有数组方法，如sort，map，forEach或pop<br>arguments对象不是一个真实的数组，不能使用上面数组方法，必须借助call来实现，如 [].slice.call(arguments).<br>arguments对象还有一些附加的属性:callee属性。  </p>
+<p>剩余语法和展开运算符看起来很相似，然而从功能上来说，是完全相反的。</p>
+<blockquote>
+<p>剩余语法(Rest syntax) 看起来和展开语法完全相同，不同点在于, 剩余参数用于解构数组和对象。从某种意义上说，剩余语法与展开语法是相反的：展开语法将数组展开为其中的各个元素，而剩余语法则是将多个元素收集起来并“凝聚”为单个元素。  </p>
+</blockquote>
+<h4 id="arguments"><a href="#arguments" class="headerlink" title="arguments"></a>arguments</h4><blockquote>
+<p>函数的的实例参数会被保存在一个类数组对象arguments中。  </p>
+</blockquote>
+<p>(arrayLike)类数组对象具备一个非负length属性，并且可以通过从0开始的索引去访问元素，让人看起来觉得像数组，比如 NodeList，但是类数组默认没有数组的那些内置方法，如push， pop, forEach， map。<br>我们可以试试，随便找一个网站，在控制台输入：<br><code>var linkList = document.querySelectorAll('a');</code><br>就得到一个NodeList，我们也可以通过数字下标去访问其中的元素，比如linkList[0]。<br>但是NodeList不是数组，它是类数组。<br><code>Array.isArray(linkLisk); //false</code><br>回到主题，arguments也是类数组，arguments的length由实参的数量决定，而不是形参的数量决定。<br><code>function add(a, b){ console.log(arguments.length); return a + b; } add(1, 2, 3, 4);//这里打印的是4，而不是2</code><br>arguments也是一个和严格模式有关联的对象</p>
+</li>
+</ul>
+<ul>
+<li><p>在非严格模式下，arguments里的元素和函数参数都是指向同一个值得引用，对arguments的修改，会直接影响函数参数。  </p>
+<p><code>function test(obj){ arguments[0] = '传入的实参是一个对象，但是被我变成字符串了'; console.log(obj) } test({name: 'jack'});</code>  </p>
+</li>
+<li><p>在严格模式下，arguments是函数参数的副本，对arguments的修改不会影响函数参数。但是arguments不能重新被赋值，关于这一点，参考另外一边文章“解读闭包，从ECMAScript词法环境，执行上下文说起”，文章解读不可变绑定是提到。在严格模式下，也不能使用arguments.caller和arguments.callee,限制了对调用栈的检测能力。  </p>
+<h3 id="函数体"><a href="#函数体" class="headerlink" title="函数体"></a>函数体</h3><blockquote>
+<p>函数体是函数的主体，其中的函数代码（function code）由一堆花括号{}包裹。函数体可以为空，也可以由任意条JavaScript语句组成。  </p>
+</blockquote>
+<h3 id="函数的调用形式"><a href="#函数的调用形式" class="headerlink" title="函数的调用形式"></a>函数的调用形式</h3><p>大体分为四种，作为普通函数，作为对象的方法，作为构造函数，通过call，apply调用  </p>
+<h4 id="作为普通函数"><a href="#作为普通函数" class="headerlink" title="作为普通函数"></a>作为普通函数</h4><blockquote>
+<p>函数作为普通函数被调用，这是函数调用的常用形式。  </p>
+</blockquote>
+<p><code>function add(a, b){ return a + b; } add();</code>  </p>
+<p>作为普通函数调用时，如果在严格模式下，函数执行时，this指向全局对象，那么对于浏览器而言，则是window对象；如果在非严格模式下，this则指向undefined。  </p>
+<h4 id="作为对象的方法"><a href="#作为对象的方法" class="headerlink" title="作为对象的方法"></a>作为对象的方法</h4><blockquote>
+<p>函数也可以作为对象的成员，这种情况下，该函数通常被称为对象方法。当函数作为对象的方法被调用时，this指向该对象，此时便可以通过this访问对象的其他成员变量或方法。  </p>
+</blockquote>
+<p><code>var counter = { num : 0, increase : function() {   this.num++; } } counter.increase();</code>  </p>
+<h4 id="作为构造函数"><a href="#作为构造函数" class="headerlink" title="作为构造函数"></a>作为构造函数</h4><blockquote>
+<p>函数配合new关键字使用时就成了构造函数。  </p>
+</blockquote>
+<p>构造函数用于实例化对象，构造函数执行过程大致如下：</p>
+</li>
+</ul>
 <ol>
-<li>“我通过在线课程学习了Python，但是我还是不知道怎么用它来编程。”</li>
-<li>“我知道这个理论，可是怎么把它运用到我的代码里啊？”</li>
-<li>“我知道while循环，但我就是不知道何时何地使用它们。”</li>
-<li>“循环数组变量我都知道，然而我不知道如何将他们组合起来。”</li>
+<li><p>首先创建一个新对象，这个新对象的_proto_属性指向构造函数的prototype属性。</p>
+</li>
+<li><p>此时构造函数的this指向这个新对象。</p>
+</li>
+<li><p>执行构造函数中的代码，一般是通过this给新对象添加新的成员属性或方法。</p>
+</li>
+<li><p>最后返回这个新对象。<br>实例化对象也可以通过一些技巧来简化，比如在构造函数中显示的return另一个对象，jQuery很巧妙地利用了这一点。具体分析详见另外篇文章“new的实现以及无new实例化”  </p>
+<h4 id="通过call，apply调用"><a href="#通过call，apply调用" class="headerlink" title="通过call，apply调用"></a>通过call，apply调用</h4><blockquote>
+<p>apply和call是函数对象的原型方法，挂载于Function.prototype。利用这俩方法，我们可以显示地绑定一个this作为调用上下文，同时也可以设置函数调用时的参数。  </p>
+</blockquote>
+</li>
 </ol>
-<h4 id="现在在我们来客观的谈一谈这个问题。"><a href="#现在在我们来客观的谈一谈这个问题。" class="headerlink" title="现在在我们来客观的谈一谈这个问题。"></a>现在在我们来客观的谈一谈这个问题。</h4><p>    首先要说的是，如果你觉得自己基础都掌握了，但是就是不能在没有他人指导的情况下写出一个程序，那么我只能说你<strong>并没有真正掌握这些基础知识。</strong><br>我能理解你面对这一情况内心的沮丧，但是你要知道这是成为一名优秀程序员<strong>必经</strong>的一个阶段，所以即使你有千百个不愿意也不得不面对这个现实。<br>接下来我们就来探讨一下，为什么那么多学生会在上完编程课程后不能“顺利出师”，并会针对这个问题给大家一些小建议，希望能助你在优秀程序员的路上越走越远。  </p>
-<h6 id="一、造成这一问题的原因"><a href="#一、造成这一问题的原因" class="headerlink" title="一、造成这一问题的原因"></a>一、造成这一问题的原因</h6><p><strong>1.“人造”的编程环境</strong><br>    造成这个问题的一大因素是在线编码课程为学生提供了一个“人造”的编程环境，在这个“人造”的编程环境中学生们通常都会在一个已经<strong>包含了指令和提示的网页上练习代码</strong>。<br>    然而这并不是编程真正的打开方式。所以课程结束后，<strong>当没有人再为学生提供这样一个“虚假”“舒适”的编程环境时，面对真正的编程环境，学生们就开始不知所措，失去了目标和方向。</strong><br>    当然，在线课程提供这种“人造”的编程环境并不是全然不好的。<strong>因为建立一个真正的编程环境通常是很复杂并且在真正的编程环境里进行编程会让初学者感到沮丧。而在线课程提供的这种“人造”的编程环境允许你不用建立起自己的编程环境就可以获得许多编程经验。</strong>然而，这种“舒适的”编程环境虽然在一定程度上减轻了你在初学编程阶段的挫折苦痛，但是它也只是将学习编程的挫折苦痛拦截到课程结束后，等课程一结束，它们就会出现在你面前。<br><strong>2.过度的指导</strong><br>    当你结束了一个在线课程，或是学习完一本书，或是在现实编程中接受他人建议时，你都能从中得到很多的提示和指导。在这种情况下，你甚至可以在刚拿到一个程序时就能知道你要输入什么甚至知道这个程序的最终结果。<br>    然而当你试图自己建立一个项目的时候，你只能看到一片空白的输入框：没有指令、没有提示、更没有人告诉你下一行要输入什么。<strong>像这样从一个简单的环境跳到一个困难的环境</strong>，你自然会感到惊慌失措甚至自我怀疑。<br>    接受过度指导的另一个后果是：<strong>学习了语法但没有学习到编程的概念</strong>。<br>    语法就是你输入的特定编程语言的文本，比如if和while。但是每种语言的语法都是不尽相同的，而你在学习编程时，不只是要学习编程语言的语法，更<strong>重要</strong>的是要学习他们的概念，比如<strong>分支和迭代</strong>。<br>    <strong>了解概念能让你理解代码实际上能做成什么，以及代码如何用不同的语言实现。</strong><br>    所以如果有人说他们知道while循环，但是不知道何时何地使用它的话，那他们肯定还没有真正理解<strong>迭代</strong>的概念。<br>    但是，我并没有说接受指导是不好的。因为当你刚开始学习的时候，你肯定需要有人来指点迷津。如果完完全全自学没有接收到任何建议指导的话，你可能会像一只无头苍蝇一样在编程世界里盲目飞行。<br>    而在你的编程生涯的每个阶段，你也都需要有人来指导你，但是一定不要接受过多的指导。因为作为初学者，如果接受了过多的指导就会给你一个错觉：<strong>编程很简单</strong>。这就会造成当你不能成功地独自写出程序时，对自己的编程人生感到怀疑。   </p>
-<h6 id="二、如何解决这个问题"><a href="#二、如何解决这个问题" class="headerlink" title="二、如何解决这个问题"></a>二、如何解决这个问题</h6><p><strong>1.创建一个真正的编程环境</strong><br>    每种编程语言需要的编程环境都是不同的。<br>    想要创建一个真正的编程环境，首先，你需要一个文本编辑器或一个IDE（集成开发环境）。然后你需要找出对你正在学习的语言来说最适合的编辑器并安装它。<br>    其次，你需要知道<strong>如何创建并运行一个包含代码的文件。</strong><br>    如果你是使用一个IDE来作为你的文本编辑器，例如：Visual Studio、Xcode或Eclipse，那么这个功能就会被构建到IDE中。你就需要了解如何创建一个新项目以及需要点击什么按钮来运行代码。<br>    但是如果你没有使用IDE，那么你可能就需要学习如何利用命令行来运行代码。你可以找一些入门指导或者上YouTube看一些免费的教学视频来学习使用命令行。<br>    最后，一旦你可以编写代码，并且能够正常运行程序，那么基本上你就开始正式步入专业程序员的道路了。<br><strong>2.从刷算法题开始，疯狂积累代码量</strong><br>    当你还是一个新手的时候，你需要疯狂的积累你的代码量，你可以从基本的问题出发，做一些简单的问题，怎么输入数据，怎么输出数据，然后熟悉各种数据结构，各种常见算法，疯狂的刷题。<br>    比如，lintcode 就是一个很不错的刷题网站。不会怎么办！看答案。推荐在这里对照查看lintcode算法题的答案：<a target="_blank" rel="noopener" href="http://www.jiuzhang.com/solution/">http://www.jiuzhang.com/solution/</a> 。先了解答案是怎么写的，然后自己实现一遍。</p>
+<p>  apply和call的区别在于：提供参数的形式不同，apply方法接受的是一个参数数组，call方法接受的是参数列表。  </p>
+<p>  <code>  someFunc.apply(obj, 1, 2, 3);   someFunc.call(obj, [1, 2, 3]);  </code>  </p>
+<p>  <em>注意，在非严格模式下使用call或apply时，如果第一个参数被指定为null或undefined，那么函数执行时的this指向全局对象（浏览器环境中是window）；<br>  如果第一个参数被指定为原始值，该原始值会被包裹。这部分内容在下文中的手写代码中会再次提到。</em><br>  call是用来实现继承的重要方法。在子类构造函数中，通过call来调用父类构造函数，以使对象实例获得来自父类构造函数的属性或方法。<br>  <code>    function Father(){       this.nationality = 'Han';     };     Father.prototype.propA = '我是父类原型上的属性';     function Child(){       Father.call(this);     };     Child.prototype.propB = '我是子类原型上的属性';     var child = new Child();     child.nationality; //Han  </code></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -511,7 +588,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://www.xy-gzs.top/2020/08/14/wo-de-di-yi-pian-wen-zhang/">http://www.xy-gzs.top/2020/08/14/wo-de-di-yi-pian-wen-zhang/</a>
+                    <a href="http://www.xy-gzs.top/2020/08/29/2/">http://www.xy-gzs.top/2020/08/29/2/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -714,35 +791,38 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/08/29/bi-bao-tan-zhi-han-shu-han-shu-ji-ben-gai-nian/">
+                <a href="/2020/08/29/2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="闭包谈之-函数，函数基本该鸟">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="闭包谈之-函数，函数基本概念">
                         
-                        <span class="card-title">闭包谈之-函数，函数基本该鸟</span>
+                        <span class="card-title">闭包谈之-函数，函数基本概念</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            闭包谈之-函数，函数基本概念#
+                            
 本文总结JavaScript中常用知识点，包含 1基础概念，2闭包，3this执行问题， 4高阶函数，5柯里化等，手写代码满满的干货，值得一看  
 
 引入一张图片：
 
 什么是函数
-一个函数可以通过外部代码调用
+一个函数可以通过外部代码调用的一个“子程序”。
+
+函数首先
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-08-29
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-29
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -751,6 +831,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -758,10 +839,10 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/08/14/wo-de-di-yi-pian-wen-zhang/">
+                <a href="/2020/08/14/1/">
                     <div class="card-image">
                         
                         
@@ -793,7 +874,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
