@@ -6,7 +6,7 @@
   <link href="http://www.xy-gzs.top/atom.xml" rel="self"/>
   
   <link href="http://www.xy-gzs.top/"/>
-  <updated>2020-08-29T19:46:28.287Z</updated>
+  <updated>2020-09-14T09:33:08.797Z</updated>
   <id>http://www.xy-gzs.top/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>闭包谈之-call,apply,bind</title>
+    <link href="http://www.xy-gzs.top/2020/09/14/bi-bao-tan-zhi-call-apply-bind/"/>
+    <id>http://www.xy-gzs.top/2020/09/14/bi-bao-tan-zhi-call-apply-bind/</id>
+    <published>2020-09-14T09:17:59.000Z</published>
+    <updated>2020-09-14T09:33:08.797Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;script&gt;
+        document.querySelectorAll(&#39;.github-emoji&#39;)
+          .forEach(el =&gt; {
+            if (!el.dataset.src) { return; }
+       </summary>
+        
+      
+    
+    
+    
+    
+    <category term="闭包" scheme="http://www.xy-gzs.top/tags/%E9%97%AD%E5%8C%85/"/>
+    
+  </entry>
+  
+  <entry>
     <title>hexo常用命令笔记</title>
     <link href="http://www.xy-gzs.top/2020/08/30/hexo-chang-yong-ming-ling-bi-ji/"/>
     <id>http://www.xy-gzs.top/2020/08/30/hexo-chang-yong-ming-ling-bi-ji/</id>
     <published>2020-08-29T19:16:41.000Z</published>
-    <updated>2020-08-29T19:46:28.287Z</updated>
+    <updated>2020-09-14T09:33:38.777Z</updated>
     
     
       
@@ -36,14 +63,16 @@ npm update hexo -g #升级 </summary>
     
     
     
+    <category term="指令" scheme="http://www.xy-gzs.top/tags/%E6%8C%87%E4%BB%A4/"/>
+    
   </entry>
   
   <entry>
     <title>闭包谈之-函数，函数基本概念</title>
-    <link href="http://www.xy-gzs.top/2020/08/29/2/"/>
-    <id>http://www.xy-gzs.top/2020/08/29/2/</id>
+    <link href="http://www.xy-gzs.top/2020/08/29/bi-bao-tan-zhi-han-shu-han-shu-ji-ben-gai-nian/"/>
+    <id>http://www.xy-gzs.top/2020/08/29/bi-bao-tan-zhi-han-shu-han-shu-ji-ben-gai-nian/</id>
     <published>2020-08-29T03:55:56.000Z</published>
-    <updated>2020-08-29T12:23:02.374Z</updated>
+    <updated>2020-09-14T09:33:04.007Z</updated>
     
     
       
@@ -61,14 +90,16 @@ npm update hexo -g #升级 </summary>
     
     
     
+    <category term="闭包" scheme="http://www.xy-gzs.top/tags/%E9%97%AD%E5%8C%85/"/>
+    
   </entry>
   
   <entry>
     <title>如何快速提升coding能力</title>
-    <link href="http://www.xy-gzs.top/2020/08/14/1/"/>
-    <id>http://www.xy-gzs.top/2020/08/14/1/</id>
+    <link href="http://www.xy-gzs.top/2020/08/14/ru-he-kuai-su-ti-sheng-coding-neng-li/"/>
+    <id>http://www.xy-gzs.top/2020/08/14/ru-he-kuai-su-ti-sheng-coding-neng-li/</id>
     <published>2020-08-14T11:36:51.000Z</published>
-    <updated>2020-08-29T12:23:13.533Z</updated>
+    <updated>2020-09-14T09:33:26.231Z</updated>
     
     
       
@@ -84,6 +115,8 @@ npm update hexo -g #升级 </summary>
     
     
     
+    
+    <category term="方法论" scheme="http://www.xy-gzs.top/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/"/>
     
   </entry>
   
